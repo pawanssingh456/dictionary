@@ -6,12 +6,13 @@ const SynonymAndAntonymService = require('../services/synonym-and-antonym');
 const RandomUtil = require('../utils/random');
 const ShuffleUtil = require('../utils/shuffle');
 
-let definitions,
+let definitions = [],
   synonyms = [],
   antonyms = [];
 
 exports.game = async word => {
   try {
+    /* Get all the defintion, synonym and antonym form services*/
     const allDefinitions = await DefinitionService.getDefinition(word);
     const synonymsAndAntonyms = await SynonymAndAntonymService.getSynonymAndAntonym(
       word
@@ -19,13 +20,13 @@ exports.game = async word => {
 
     definitions = allDefinitions.data;
 
+    /* Check if synonym and antonym exists */
     if (synonymsAndAntonyms.data.length > 1) {
       antonyms = synonymsAndAntonyms.data[0].words;
       synonyms = synonymsAndAntonyms.data[1].words;
     } else {
       synonyms = synonymsAndAntonyms.data[0].words;
     }
-    index = Math.max(definitions.length, synonyms.length, antonyms.length);
 
     showDefintion();
     showSynonym();
@@ -77,6 +78,7 @@ async function getAnswer(word, synonyms) {
   });
 }
 
+/* When Quit option is choosen this function will be used */
 async function fullDictionary(word) {
   console.info('Definitions:-');
   for (const definition of definitions) {
@@ -94,6 +96,7 @@ async function fullDictionary(word) {
   await ExampleController.examples(word);
 }
 
+/* Show options if user gives wrong answer */
 async function showOptions(word, synonyms) {
   const questions = [
     {
