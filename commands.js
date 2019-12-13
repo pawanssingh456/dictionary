@@ -49,7 +49,7 @@ program.option('d, defn <word>', 'Get definitions of a word', definition);
 program.option('s, syn <word>', 'Get synonyms of a word', synonym);
 program.option('a, ant <word>', 'Get antonyms of a word', antonym);
 program.option('e, ex <word>', 'Get examples of a word', example);
-program.option('p, play', 'Word Of the day', play);
+program.option('p, play', 'Play the game', play);
 
 program.parse(process.argv);
 
