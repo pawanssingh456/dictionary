@@ -6,7 +6,7 @@ exports.wordOfTheDay = async () => {
 
     return wordOfTheDay.data.word;
   } catch (error) {
-    console.info('Error getting word of the day. Try again later.');
+    console.info(error);
     process.exit();
   }
 };
